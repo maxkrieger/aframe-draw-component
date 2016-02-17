@@ -34,7 +34,7 @@ AFRAME.registerComponent("square", {
 	dependencies: ["draw"],
 
 	update: function() {
-		var draw = this.el.components.draw;
+		var draw = this.el.components.draw; //get access to the draw component
 		var ctx = draw.ctx;
 		var canvas = draw.canvas;
 		ctx.fillStyle = "#AFC5FF";
@@ -44,13 +44,61 @@ AFRAME.registerComponent("square", {
 		ctx.fillStyle = "white";
 		ctx.font = "36px Georgia";
 		ctx.fillText(this.data.text, 80, 140);
-		draw.render();
+		draw.render(); //tell it to update the texture
 	}
 });
 ```
 
-The example above is also key to writing your own components which use `draw`. The `draw` component exposes a hidden `canvas` and `ctx` which can be used to perform regular methods on. The material must then be updated, so call the `render()` method.
+**Note**: the example above is not ideal for third-party components, or when you're using multiple components in your project which use `draw`. See below:
 
+##Advanced Usage & Render Binding
+
+When writing a generic third party component, you will more than likely want to re-render the canvas. This may also require a clearing of the canvas itself. Because of this, it's imperative that every third party component encapsulate their use of the canvas into their own local render functions, and then register these functions into `draw`.
+
+`draw` can then put every component into a call stack, and then re-render each component in the exact order that they were placed in. This also potentially allows for layering, although a-frame can handle this on its own using component updates pretty well.
+
+An example of this uses `Object.bind`:
+
+```js
+AFRAME.registerComponent("square", {
+	dependencies: ["draw"],
+	init: function() {
+		this.draw = this.el.components.draw;
+		this.draw.register(this.render.bind(this));
+	},
+	update: function () {
+		this.draw.render();
+	},
+	render: function () {
+		var ctx = this.draw.ctx;
+		var canvas = this.draw.canvas;
+		ctx.fillStyle = "#AFC5FF";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.fillStyle = this.data.color;
+		ctx.fillRect(68, 68, 120, 120);
+	}
+});
+
+AFRAME.registerComponent("greeting", {
+	dependencies: ["draw"],
+	init: function() {
+		this.draw = this.el.components.draw;
+		this.draw.register(this.render.bind(this));
+	},
+	update: function () {
+		this.draw.render();
+	},
+	render: function () {
+		var draw = this.draw;
+		var ctx = draw.ctx;
+		ctx.fillStyle = "white";
+		ctx.font = "36px Georgia";
+		ctx.fillText(this.data.text, 80, 140);
+	}
+});
+```
+
+After each component is initialized, it registers its own `render` function with `draw`. If its own data is changed (within the `update` function), it will tell `draw` to re-render the entire canvas, and call both the `square` and `greeting`'s `render` functions in order in order.
 
 ##Methods & Component Properties
 
@@ -60,6 +108,7 @@ The example above is also key to writing your own components which use `draw`. T
 |------|-------|
 |`.canvas`|hidden canvas to perform methods on|
 |`.ctx`|hidden ctx to perform methods on|
+|`.register([func] render)`|add your component's own `render` function to the registry so that it will re-render on any render call.|
 |`.render()`|update the material with the new canvas|
 
 ##Properties

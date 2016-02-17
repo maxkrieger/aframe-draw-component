@@ -3,22 +3,42 @@ var drawComponent = require("../index.js").component;
 AFRAME.registerComponent("draw", drawComponent);
 AFRAME.registerComponent("square", {
 	dependencies: ["draw"],
-
-	update: function() {
-		var draw = this.el.components.draw;
-		var ctx = draw.ctx;
-		var canvas = draw.canvas;
+	init: function() {
+		this.draw = this.el.components.draw;
+		this.draw.register(this.render.bind(this));
+	},
+	update: function () {
+		this.draw.render();
+	},
+	render: function () {
+		var ctx = this.draw.ctx;
+		var canvas = this.draw.canvas;
 		ctx.fillStyle = "#AFC5FF";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
-		ctx.fillStyle = "blue";
+		ctx.fillStyle = this.data.color;
 		ctx.fillRect(68, 68, 120, 120);
-		ctx.fillStyle = "white";
-		ctx.font = "36px Georgia";
-		ctx.fillText(this.data.text, 80, 140);
-		draw.render();
 	}
 });
 
-window.setTimeout(function() { //demonstrates the update closure for the square component
-	document.querySelector("#sq").setAttribute("square", "text", "Hola");
+AFRAME.registerComponent("greeting", {
+	dependencies: ["draw"],
+	init: function() {
+		this.draw = this.el.components.draw;
+		this.draw.register(this.render.bind(this));
+	},
+	update: function () {
+		this.draw.render();
+	},
+	render: function () {
+		var draw = this.draw;
+		var ctx = draw.ctx;
+		ctx.fillStyle = "white";
+		ctx.font = "36px Georgia";
+		ctx.fillText(this.data.text, 80, 140);
+	}
+});
+
+window.setTimeout(function () { //demonstrates the update closure for the square component
+	document.querySelector("#sq").setAttribute("greeting", "text", "Hola");
+	document.querySelector("#sq").setAttribute("square", "color", "red");
 }, 2000);
