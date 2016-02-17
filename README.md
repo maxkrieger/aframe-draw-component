@@ -33,7 +33,7 @@ Or, if you want direct access to the Canvas API, write a quick component yoursel
 AFRAME.registerComponent("square", {
 	dependencies: ["draw"],
 
-	init: function() {
+	update: function() {
 		var draw = this.el.components.draw;
 		var ctx = draw.ctx;
 		var canvas = draw.canvas;

@@ -4,7 +4,7 @@ AFRAME.registerComponent("draw", drawComponent);
 AFRAME.registerComponent("square", {
 	dependencies: ["draw"],
 
-	init: function() {
+	update: function() {
 		var draw = this.el.components.draw;
 		var ctx = draw.ctx;
 		var canvas = draw.canvas;
@@ -18,3 +18,7 @@ AFRAME.registerComponent("square", {
 		draw.render();
 	}
 });
+
+window.setTimeout(function() { //demonstrates the update closure for the square component
+	document.querySelector("#sq").setAttribute("square", "text", "Hola");
+}, 2000);
