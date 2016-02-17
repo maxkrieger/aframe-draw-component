@@ -30,8 +30,7 @@ AFRAME.registerComponent("greeting", {
 		this.draw.render();
 	},
 	render: function () {
-		var draw = this.draw;
-		var ctx = draw.ctx;
+		var ctx = this.draw.ctx;
 		ctx.fillStyle = "white";
 		ctx.font = "36px Georgia";
 		ctx.fillText(this.data.text, 80, 140);
