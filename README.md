@@ -98,7 +98,7 @@ AFRAME.registerComponent("greeting", {
 });
 ```
 
-After each component is initialized, it registers its own `render` function with `draw`. If its own data is changed (within the `update` function), it will tell `draw` to re-render the entire canvas, and call both the `square` and `greeting`'s `render` functions in order in order.
+After each component is initialized, it registers its own `render` function with `draw`. If its own data is changed (within the `update` function), it will tell `draw` to re-render the entire canvas, and call both the `square` and `greeting`'s `render` functions in order.
 
 ##Methods & Component Properties
 

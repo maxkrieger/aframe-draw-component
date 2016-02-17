@@ -87,7 +87,11 @@
 		 * Called once when component is attached. Generally for initial setup.
 		 */
 		init: function () {
+			this.registers = []; //order of eventing after render
+		},
 
+		register: function(render) {
+			this.registers.push(render);
 		},
 
 		/**
@@ -114,6 +118,12 @@
 		},
 
 		render: function() {
+			if(this.registers.length > 0) { //backwards compatibility
+				this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+				this.registers.forEach(function(item) {
+					item();
+				});
+			}
 			this.el.setAttribute("material", "src", "url(" + this.canvas.toDataURL() + ")");
 		},
 
