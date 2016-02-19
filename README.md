@@ -119,7 +119,7 @@ After each component is initialized, it registers its own `render` function with
 |`background`|background color of canvas|
 
 ##Featured Components
-* none yet!
+* [Text Wrap](https://www.npmjs.com/package/aframe-textwrap-component) - full text wrapping.
 
 ##Additional Info
 
