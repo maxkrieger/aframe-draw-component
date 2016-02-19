@@ -1,6 +1,6 @@
 {
   "name": "aframe-draw-component",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "HTML5 canvas component for A-Frame VR.",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/maxkrieger/aframe-draw-component#readme",
   "devDependencies": {
-    "aframe-core": "^0.1.0",
+    "aframe-core": "0.1.2",
     "babel-eslint": "^4.1.8",
     "browserify": "^12.0.1",
     "browserify-css": "^0.8.3",

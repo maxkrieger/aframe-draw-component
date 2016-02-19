@@ -116,6 +116,7 @@ After each component is initialized, it registers its own `render` function with
 |------|-------|
 |`width`|width of canvas (should match ratio of a face of the entity)|
 |`height`|height of canvas (should match ratio of a face of the entity)|
+|`background`|background color of canvas|
 
 ##Featured Components
 * none yet!

@@ -12,9 +12,6 @@ AFRAME.registerComponent("square", {
 	},
 	render: function () {
 		var ctx = this.draw.ctx;
-		var canvas = this.draw.canvas;
-		ctx.fillStyle = "#AFC5FF";
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.fillStyle = this.data.color;
 		ctx.fillRect(68, 68, 120, 120);
 	}
