@@ -80,6 +80,9 @@
 			},
 			height: {
 				default: 256
+			},
+			background: {
+				default: "#FFFFFF"
 			}
 		},
 
@@ -120,6 +123,8 @@
 		render: function() {
 			if(this.registers.length > 0) { //backwards compatibility
 				this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+				this.ctx.fillStyle = this.data.background;
+				this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 				this.registers.forEach(function(item) {
 					item();
 				});
