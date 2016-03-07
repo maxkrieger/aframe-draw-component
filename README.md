@@ -119,7 +119,8 @@ After each component is initialized, it registers its own `render` function with
 |`background`|background color of canvas|
 
 ##Featured Components
-* [Text Wrap](https://www.npmjs.com/package/aframe-textwrap-component) - full text wrapping.
+* [Text Wrap](https://www.npmjs.com/package/aframe-textwrap-component) - full text wrapping
+* [HTML Texture](https://github.com/scenevr/htmltexture-component) - render html as a texture (!!!)
 
 ##Additional Info
 
