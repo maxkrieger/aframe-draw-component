@@ -33,9 +33,14 @@ module.exports.component = {
 		_.ctx = canvas.getContext("2d");
 
 		this.texture = new THREE.Texture(_.canvas); //renders straight from a canvas
-		this.el.object3D.material = new THREE.MeshBasicMaterial();
-		this.el.object3D.material.map = this.texture;
-
+		if(this.el.object3D.children.length > 0) { //backwards compatibility
+			this.el.object3D.children[0].material = new THREE.MeshBasicMaterial();
+			this.el.object3D.children[0].material.map = this.texture;
+		}
+		else { //backwards compatibility
+			this.el.object3D.material = new THREE.MeshBasicMaterial();
+			this.el.object3D.material.map = this.texture;
+		}
 		if(!this.el.hasLoaded) this.el.addEventListener("loaded", function() {
 			_.render();
 		});
