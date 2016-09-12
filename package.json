@@ -1,6 +1,6 @@
 {
   "name": "aframe-draw-component",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "HTML5 canvas component for A-Frame VR.",
   "main": "index.js",
   "scripts": {
