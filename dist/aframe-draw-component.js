@@ -85,6 +85,7 @@
 
 		init: function () {
 			this.registers = []; //order of eventing after render
+			this.update();
 		},
 
 		register: function(render) {
