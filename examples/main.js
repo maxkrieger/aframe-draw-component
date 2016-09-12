@@ -1,4 +1,4 @@
-var AFRAME = require("aframe-core");
+var AFRAME = require("aframe");
 var drawComponent = require("../index.js").component;
 AFRAME.registerComponent("draw", drawComponent);
 AFRAME.registerComponent("square", {
