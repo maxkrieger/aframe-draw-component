@@ -8,7 +8,10 @@ module.exports.component = {
 		},
 		background: {
 			default: "#FFFFFF"
-		}
+		},
+	    reverse: {
+			default: false
+	    }
 	},
 
 	init: function () {
@@ -33,13 +36,20 @@ module.exports.component = {
 		_.canvas = canvas;
 		_.ctx = canvas.getContext("2d");
 
+		if (this.data.reverse) {
+	      _.ctx.translate(w, 0);
+	      _.ctx.scale(-1, 1);
+	    }
+
 		this.texture = new THREE.Texture(_.canvas); //renders straight from a canvas
 		if(this.el.object3D.children.length > 0) { //backwards compatibility
 			this.el.object3D.children[0].material = new THREE.MeshBasicMaterial();
+      		this.el.object3D.children[0].material.side = THREE.DoubleSide;
 			this.el.object3D.children[0].material.map = this.texture;
 		}
 		else { //backwards compatibility
 			this.el.object3D.material = new THREE.MeshBasicMaterial();
+      		this.el.object3D.material.side = THREE.DoubleSide;
 			this.el.object3D.material.map = this.texture;
 		}
 		if(!this.el.hasLoaded) this.el.addEventListener("loaded", function() {
