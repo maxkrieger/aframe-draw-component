@@ -6,7 +6,7 @@ HTML5 canvas as a material for an [A-Frame](https://aframe.io) VR entity.
 
 Fully extendable with components which utilize the canvas api.
 
-**Note: if you can't get the component to work with the latest A-Frame version, check out [Mayo](https://github.com/mayognaise/)'s shader variations.
+**Note: if you can't get the component to work with the latest A-Frame version, check out [Mayo](https://github.com/mayognaise/)'s shader variations.**
 
 
 ## Installation
